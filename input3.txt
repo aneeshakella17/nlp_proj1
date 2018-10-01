@@ -1,0 +1,12 @@
+50
+This is an example test case with multilists:
+
+        1. the first top list
+                * the first list in the first top list
+                * the second list in the first top list
+        2. the second top list
+        3. the third top list
+                * the first list in the third top list
+                * the second list in the third top list
+
+This is the end statement.

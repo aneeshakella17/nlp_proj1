@@ -45,7 +45,7 @@ def main():
         word = word.strip();
         our_dictionary[word] = True;
 
-    file_name = "input2.txt"
+    file_name = "input3.txt"
     f = open(file_name, 'r');
     lines = f.readlines();
 
@@ -71,19 +71,23 @@ def main():
             paragraphs.append(paragraph);
             paragraph = [];
         paragraph.append(line.strip('\n'));
-
-
-
+    paragraphs.append(paragraph)
 
 
 
     #Remove any leading dashes and add necessary spaces;
+    new_str = "";
+    for i in range(0, len(paragraphs)):
 
-    for lines in paragraphs:
+
+        lines = paragraphs[i];
+
+        if(i != len(paragraphs) - 1):
+            lines.append("\n")
+
+
         orig_str = "";
-        new_str = "";
         for line_num in range(0, len(lines)):
-
             if(len(lines[line_num]) <= 0):
                 continue;
             elif(lines[line_num][-1] == "-"):
@@ -97,16 +101,12 @@ def main():
                 lines[line_num] += " "
 
         for line in lines:
-            if(line == ""):
-                orig_str += '\n'
-            else:
-                orig_str += line;
+            orig_str += line;
 
 
         left_to_justify = len(orig_str);
-        start = 0;
 
-        #print(orig_str);
+        start = 0;
         while(left_to_justify > 0):
             characters_in_line = min(justify_by, left_to_justify);
 
@@ -122,12 +122,12 @@ def main():
 
 
             new_str += orig_str[start:start + characters_in_line] + '\n';
-            print(orig_str[start:start + characters_in_line], characters_in_line);
             start += characters_in_line;
             left_to_justify -= characters_in_line;
 
-f = open("output.txt", 'w');
-f.write(new_str);
+    f = open("output.txt", 'w');
+    print(repr(new_str))
+    f.write(new_str);
 
 
 main();
