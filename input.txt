@@ -1,0 +1,6 @@
+40
+Your  program should scan the input pre-justified
+text  and divide it into words, merge splitting-
+words (by removing hyphens or “\n”) and reformat
+to different width with justification and split-
+ting.
