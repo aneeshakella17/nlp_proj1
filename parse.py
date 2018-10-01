@@ -45,7 +45,7 @@ def main():
         word = word.strip();
         our_dictionary[word] = True;
 
-    file_name = "input3.txt"
+    file_name = "input2.txt"
     f = open(file_name, 'r');
     lines = f.readlines();
 
@@ -66,12 +66,18 @@ def main():
 #remove any newlines
     paragraphs = [];
     paragraph = [];
+    isParagraph = True;
     for line in lines[1::]:
         if(line == '\n'):
-            paragraphs.append(paragraph);
+            paragraphs.append((paragraph, isParagraph))
             paragraph = [];
-        paragraph.append(line.strip('\n'));
-    paragraphs.append(paragraph)
+            isParagraph = True;
+        elif(line[0] == '\t'):
+            isParagraph = False;
+            paragraph.append(line);
+        else:
+            paragraph.append(line.strip('\n'));
+    paragraphs.append((paragraph, isParagraph));
 
 
 
@@ -80,53 +86,55 @@ def main():
     for i in range(0, len(paragraphs)):
 
 
-        lines = paragraphs[i];
+        lines, is_paragraph = paragraphs[i];
 
-        if(i != len(paragraphs) - 1):
+
+
+        if(i != len(paragraphs) - 1 and len(paragraphs) != 1):
             lines.append("\n")
 
-
-        orig_str = "";
-        for line_num in range(0, len(lines)):
-            if(len(lines[line_num]) <= 0):
-                continue;
-            elif(lines[line_num][-1] == "-"):
-                pre_word, post_word = pre_and_post_dash([lines[line_num], lines[line_num + 1]]);
-                if(our_dictionary.get(pre_word + post_word) == None):
+        if(is_paragraph):
+            orig_str = "";
+            for line_num in range(0, len(lines)):
+                if(len(lines[line_num]) <= 0):
                     continue;
-                else:
-                    lines[line_num] = lines[line_num][:-1];
+                elif(lines[line_num][-1] == "-"):
+                    pre_word, post_word = pre_and_post_dash([lines[line_num], lines[line_num + 1]]);
+                    if(our_dictionary.get(pre_word + post_word) == None):
+                        continue;
+                    else:
+                        lines[line_num] = lines[line_num][:-1];
 
-            elif(lines[line_num][-1] != " "):
-                lines[line_num] += " "
+                elif(lines[line_num][-1] != " "):
+                    lines[line_num] += " "
 
-        for line in lines:
-            orig_str += line;
-
-
-        left_to_justify = len(orig_str);
-
-        start = 0;
-        while(left_to_justify > 0):
-            characters_in_line = min(justify_by, left_to_justify);
-
-            if(orig_str[start + characters_in_line - 1].isalpha()
-                and orig_str[start + characters_in_line - 2].isalpha()):
-                        if(len(orig_str) > start + characters_in_line and orig_str[start + characters_in_line].isalpha()):
-                            orig_str = orig_str[:start+characters_in_line - 1] + '-' + orig_str[start + characters_in_line - 1:]
-                            left_to_justify += 1;
-
-            elif(orig_str[start + characters_in_line - 1].isalpha() and orig_str[start + characters_in_line - 2] == " "):
-                orig_str = orig_str[:start + characters_in_line - 1] + ' ' + orig_str[start + characters_in_line - 1:];
-                left_to_justify += 1;
+            for line in lines:
+                orig_str += line;
 
 
-            new_str += orig_str[start:start + characters_in_line] + '\n';
-            start += characters_in_line;
-            left_to_justify -= characters_in_line;
+            left_to_justify = len(orig_str);
+
+            start = 0;
+            while(left_to_justify > 0):
+                characters_in_line = min(justify_by, left_to_justify);
+
+                if(orig_str[start + characters_in_line - 1].isalpha()
+                    and orig_str[start + characters_in_line - 2].isalpha()):
+                            if(len(orig_str) > start + characters_in_line and orig_str[start + characters_in_line].isalpha()):
+                                orig_str = orig_str[:start+characters_in_line - 1] + '-' + orig_str[start + characters_in_line - 1:]
+                                left_to_justify += 1;
+
+                elif(orig_str[start + characters_in_line - 1].isalpha() and orig_str[start + characters_in_line - 2] == " "):
+                    orig_str = orig_str[:start + characters_in_line - 1] + ' ' + orig_str[start + characters_in_line - 1:];
+                    left_to_justify += 1;
+
+
+                new_str += orig_str[start:start + characters_in_line] + '\n';
+                start += characters_in_line;
+                left_to_justify -= characters_in_line;
+
 
     f = open("output.txt", 'w');
-    print(repr(new_str))
     f.write(new_str);
 
 

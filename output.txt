@@ -1,11 +1,17 @@
-This is an example test case with multilists: 
+We conduct primary research to develop a list of vendors that meet our  
+criteria for evaluation in this market. From that initial pool of vendo-
+rs, we narrow our final list. We choose these vendors based on 1) produ-
+ct fit; 2) customer success; and 3) Forrester client demand. We elimina-
+te vendors that have limited customer references and products that don't
+ fit the scope of our evaluation. Vendors marked as incomplete particip-
+ants met our defined inclusion criteria but declined to participate or  
+contributed only partially to the evaluation. 
  
-        1. the first top list                 * t-
-he first list in the first top list               
-  * the second list in the first top list         
-2. the second top list         3. the third top l-
-ist                 * the first list in the third 
-top list                 * the second list in the 
-third top list 
- 
-This is the end statement. 
+After examining past research, user needs assessments, and vendor and e-
+xpert interviews, we develop the initial evaluation criteria. To evalua-
+te the vendors and their products against our set of criteria, we gather
+ details of product qualifications through a combination of lab evaluat-
+ions, questionnaires, demos, and/or discussions with client references. 
+We send evaluations to the vendors for their review, and we adjust the  
+evaluations to provide the most accurate view of vendor offerings and s-
+trategies. 
